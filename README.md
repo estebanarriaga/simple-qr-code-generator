@@ -1,34 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <a href="https://generator.estebanarriaga.com">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://chart.googleapis.com/chart?chl=generator.estebanarriaga.com&choe=UTF-8&chs=300x300&cht=qr&chld=L">
+      <img src="https://chart.googleapis.com/chart?chl=generator.estebanarriaga.com&choe=UTF-8&chs=300x300&cht=qr&chld=L" height="128">
+    </picture>
+  </a>
+</p>
 
-## Getting Started
+<p align="center">
+  <a aria-label="generator.estebanarriaga.com" href="generator.estebanarriaga.com">
+    <h3 align="center">generator.estebanarriaga.com</h3>
+  </a>
+</p>
 
-First, run the development server:
+## QR Generator
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+I was tired of **'Free'** QR code generating webisites. All of them force you to create an account or pay a fee just for a simple QR code!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+As a developer this is a complete waste of time for something that simple, so I've created my own.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Try it out
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Visit the [website](https://generator.estebanarriaga.com) if you want to save time.
 
-## Learn More
+### How it works
 
-To learn more about Next.js, take a look at the following resources:
+Google provides an API for chart generation [(full documentation)](https://developers.google.com/chart/infographics/docs/qr_codes) 
+The Google API just has to be called with a set a URI components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+|                |Description											|Required?                         |
+|----------------|-------------------------------|-----------------------------|
+|`cht=qr`|Specifies that it's a QR code.|*Required*|
+|`chs=<_width_>x<_height_>` |Image size.|*Required*|
+|`choe=<_data_>`|How to encode the data in the QR code. UTF-8 in our case.|*Required*|
+|`chld=<_margin_>`|he width of the white border around the data portion of the code. This is in _rows_, not in _pixels_|*Optional*|
+|`chl=<data>`|The data to encode|*Required*
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Example**: 
+* For encoding <ins>generator.estebanarriaga.com</ins> we sent this values to the API:
 
-## Deploy on Vercel
+| Key | Value |
+|------|-------|
+|`api-url:`|`https://chart.googleapis.com/chart?`|
+|	`chl`|`generator.estebanarriaga.com`|
+|`choe`|`UTF-8`|
+|`chs`|`300x300`|
+|`cht`| `qr`|
+|`chld`|`L`|
+|
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Sofware
+The page id built using:
+* [Tailwind css](https://tailwindcss.com/): For fast styling
+* [Next.js 13](https://nextjs.org/): As a React framework 
+* [Typescript](https://www.typescriptlang.org/): For types
+* [shadcn/ui](https://ui.shadcn.com/): For the components
